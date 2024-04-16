@@ -25,7 +25,7 @@ Shortify is a simple URL shortener web application built with Python and Flask.
 1. Clone this repository: `git clone https://github.com/MuhammadUmer78/Shortify.git`
 2. Navigate to the project directory: `cd Shortify`
 3. Install the required dependencies: `pip install -r requirements.txt`
-4. Run the Flask application: `python app.py`
+4. Run the Flask application: `python main.py`
 
 ## Usage
 1. Access the Shortify web app through your browser.
