@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shortify | URL Shortener</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><a href="#">Shortify</a></div>
+            <div class="navigation">
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="container">
+            <div class="content">
+                <h2>Shortify your URL</h2>
+                <form action="/" method="POST">
+                    <div class="input-url">
+                        <label for="url" class="form-label">Enter your URL</label>
+                        <input class="form-input" type="text" name="url" id="url" required>
+                    </div>
+                    <button type="submit" class="btn">Shortify</button>
+                </form>
+            </div>
+            <div class="result">
+                <h3>Shortified URL</h3>
+                {% if allData|length == 0 %}
+                <div class="no-record">
+                    No records found. Add a URL to shortify using the form above.
+                </div>
+                {% else %}
+                <div class="table">
+                    <table class="table">
+                        <div class="table-head">
+                            <thead>
+                                <tr>
+                                  <th scope="col">S.No</th>
+                                  <th scope="col">URL</th>
+                                  <th scope="col">Shortify URL</th>
+                                  <th scope="col">Time</th>
+                                  <th scope="col">Actions</th>
+                              </tr>
+                              </thead>
+                        </div>
+                        <div class="table">
+                            <tbody class="table-body">
+                                {% for shortify in allData %}
+                                <tr>
+                                  <th class="data" scope="row">{{loop.index}}</th>
+                                  <td class="data url">{{shortify.url}}</td>
+                                  <td class="data url">{{shortify.shortify_url}}</td>
+                                  <td class="data">{{shortify.date_created}}</td>
+                                  <td><button class="btn-copy btn-dark" onclick="copyToClipboard('{{shortify.shortify_url}}')">Copy</button></td>
+                                  <td><a href="/delete/{{shortify.sno}}" type="button" class="btn-outline-dark">Delete</a></td>
+                                </tr>
+                                {% endfor %}
+                              </tbody>
+                        </div>
+                      {% endif %}
+                      </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
